@@ -48,14 +48,25 @@ You can press:
 
 # Requirements
 
-* tmux 2.2+
-* bash 4+
-* gawk 4.1+ (which was released in 2013)
+* **tmux** 2.2+
+* **bash** 4+
+* **gawk** 4.1+ (which was released in 2013)
+* xclip (you can change config to use xsel or something else)
 
 # Troubleshooting
 
 - <kbd>Meta</kbd> + <kbd>F</kbd> does not work in copy mode
     - Set `set-option -g mode-keys vi`, adjust your key bindings or change `PICKER_KEY`
+
+# Notes
+
+You can also add:
+
+```
+bind -n M-p run "tmux set-buffer -- \"$(xclip -o -sel primary)\"; tmux paste-buffer"
+```
+
+to your `.tmux.conf` to allow pasting from clipboard using <kbd>Meta</kbd> + <kbd>P</kbd>.
 
 # Acknowledgements
 
