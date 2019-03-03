@@ -10,10 +10,9 @@ pane_input_temp=$5
 
 eval "$(tmux show-env -g -s | grep ^PICKER)"
 
-match_lookup_table=$(mktemp)
-
 # exporting it so they can be properly deleted inside handle_exit trap
-export match_lookup_table
+export match_lookup_table=$(mktemp)
+
 
 function lookup_match() {
     local input=$1
@@ -171,13 +170,13 @@ while read -rsn1 char; do
     if [[ $char == "$BACKSPACE" ]]; then
         input=""
         continue
-    elif [[ $char == "<ESC>" ]]; then
-            exit
+    elif [[ $char == "<ESC>"  || $char == "q" ]]; then
+        exit
     elif [[ $char == "" ]]; then
         if [ "$PICKER_PATTERNS" = "$PICKER_PATTERNS1" ]; then
-                export PICKER_PATTERNS=$PICKER_PATTERNS2;
+            export PICKER_PATTERNS=$PICKER_PATTERNS2;
         else
-                export PICKER_PATTERNS=$PICKER_PATTERNS1;
+            export PICKER_PATTERNS=$PICKER_PATTERNS1;
         fi
         show_hints_again "$picker_pane_id"
         continue

@@ -27,7 +27,7 @@ function array_join() {
 #
 
 # Every pattern have be of form ((A)B) where:
-#  - A is part that will not be highlighted (e.g. escape sequence, whitespace) 
+#  - A is part that will not be highlighted (e.g. escape sequence, whitespace)
 #  - B is part will be highlighted (can contain subgroups)
 #
 # Valid examples:
@@ -73,9 +73,8 @@ BLACKLIST=(
 "(deleted|modified|renamed|copied|master|mkdir|[Cc]hanges|update|updated|committed|commit|working|discard|directory|staged|add/rm|checkout)"
 )
 
-# "-n M-f" for Alt-F without prefix
-# "f" for prefix-F
-PICKER_KEY="-n M-f" 
+# "-n M-y" for Alt-y without prefix
+PICKER_KEY="-n M-y"
 
 set_tmux_env PICKER_PATTERNS1 $(array_join "|" "${PATTERNS_LIST1[@]}")
 set_tmux_env PICKER_PATTERNS2 $(array_join "|" "${PATTERNS_LIST2[@]}")
